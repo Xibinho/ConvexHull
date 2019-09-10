@@ -24,9 +24,16 @@ namespace ConvexHull
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            gs.convexHull(listPoints);
+            var result = gs.convexHull(listPoints);
             stopwatch.Stop();
             float elapsed_time = stopwatch.ElapsedMilliseconds;
+
+            Console.WriteLine("# Convex Hull #");
+            foreach (Point value in result)
+            {
+                Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+            }
+            Console.WriteLine();
             Console.WriteLine("Elapsed time: {0} milliseconds", elapsed_time);
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();
@@ -49,6 +56,7 @@ namespace ConvexHull
         public static void Main()
         {
             listPoints = new List<Point>();
+
             listPoints.Add(new Point(9, 1));
             listPoints.Add(new Point(4, 3));
             listPoints.Add(new Point(4, 5));
@@ -72,7 +80,7 @@ namespace ConvexHull
 
             GrahamScanDemo();
 
-            JarvisMarchDemo();
+            //sJarvisMarchDemo();
         }
 
     }

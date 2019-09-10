@@ -30,5 +30,25 @@ namespace ConvexHull
             return y;
         }
     }
-     
+    
+    // Helper class to let us easily pass list of points from AHK to C#
+    public class PointsList
+    {
+        public List<Point> Points { get; }
+
+        public PointsList()
+        {
+            Points = new List<Point>();
+        }
+
+        public void Add(int x, int y)
+        {
+            Points.Add(new Point(x, y));
+        }
+
+        public int Test()
+        {
+            return Points[0].getX();
+        }
+    }
 }
