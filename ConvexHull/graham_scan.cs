@@ -91,7 +91,7 @@ namespace ConvexHull
             return arrSortedInt;
         }
 
-        public Point[] convexHull(List<Point> points)
+        public List<Point> convexHull(List<Point> points)
         {
             //Console.WriteLine("# List of Point #");
             //foreach (Point value in points)
@@ -149,7 +149,7 @@ namespace ConvexHull
             //    Console.Write("(" + value.X + "," + value.Y + ") ");
             //}
             //Console.WriteLine();
-            return result.ToArray();
+            return result;
         }
 
     }
