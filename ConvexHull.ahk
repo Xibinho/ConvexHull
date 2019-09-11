@@ -6,10 +6,6 @@
 ; Load the C# DLL
 asm := CLR_LoadLibrary("ConvexHull.dll")
 
-; Create a GrahamScan C# class to do the computation for us
-GrahamScanner := asm.CreateInstance("ConvexHull.GrahamScan")
-JarvisMarcher := asm.CreateInstance("ConvexHull.JarvisMarch")
-
 ; Create a C# PointsList object to allow us to pass the data to C#
 pl := asm.CreateInstance("ConvexHull.PointsList")
 
@@ -35,18 +31,32 @@ pl.Add(2, 4)
 pl.Add(7, 8)
 pl.Add(5, 5)
 
+; Create a string for outputting the returned data
+str := ""
+
+; ================= Graham Scan Demo =======================
+; Create C# class to do the computation for us
+GrahamScanner := asm.CreateInstance("ConvexHull.GrahamScan")
+
 ; Get the result from the C# code
 result := GrahamScanner.ConvexHull(pl.Points)
 
 ; .NET List<Point> is not easy to use from AHK, so wrap it in a helper class to make it behave like a normal AHK array
 result := new ListWrapper(result)
 
-; Build a string containing the returned data
-str := "Graham Scan results:`n"
+; Append returned data to string
+str .= "Graham Scan results:`n"
 ; Iterate through each returned point, and add it to the string
 for k, v in result {
 	str .= v.X ", " v.Y "`n"
 }
+
+str .= "`n`n==============================`n`n"
+
+; ================= Jarvis March Demo =======================
+
+; Create C# class to do the computation for us
+JarvisMarcher := asm.CreateInstance("ConvexHull.JarvisMarch")
 
 ; Get the result from the C# code
 result := JarvisMarcher.ConvexHull(pl.Points)
@@ -54,8 +64,7 @@ result := JarvisMarcher.ConvexHull(pl.Points)
 ; .NET List<Point> is not easy to use from AHK, so wrap it in a helper class to make it behave like a normal AHK array
 result := new ListWrapper(result)
 
-; Build a string containing the returned data
-str .= "`n`n==============================`n`n"
+; Append returned data to string
 str .= "Jarvis March results:`n"
 ; Iterate through each returned point, and add it to the string
 for k, v in result {
