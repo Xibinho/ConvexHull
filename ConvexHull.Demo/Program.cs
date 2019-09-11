@@ -6,9 +6,7 @@
 // 2016-05-11 <oss.devel@searchathing.com> : created csprj and splitted Main into a separate file
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
-using ConvexHull;
 
 namespace ConvexHull
 {
