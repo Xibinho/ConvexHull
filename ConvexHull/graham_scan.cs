@@ -26,22 +26,12 @@ namespace ConvexHull
         {
             while (hull.Count > 1 && turn(hull[hull.Count - 2], hull[hull.Count - 1], r) != TURN_LEFT)
             {
-                //Console.WriteLine("Removing Point ({0}, {1}) because turning right ", hull[hull.Count - 1].X, hull[hull.Count - 1].Y);
                 hull.RemoveAt(hull.Count - 1);
             }
             if (hull.Count == 0 || hull[hull.Count - 1] != r)
             {
-                //Console.WriteLine("Adding Point ({0}, {1})", r.X, r.Y);
                 hull.Add(r);
             }
-            //Console.WriteLine("# Current Convex Hull #");
-            foreach (Point value in hull)
-            {
-                //Console.Write("(" + value.X + "," + value.Y + ") ");
-            }
-            //Console.WriteLine();
-            //Console.WriteLine();
-
         }
 
         public double getAngle(Point p1, Point p2)
@@ -93,14 +83,6 @@ namespace ConvexHull
 
         public List<Point> convexHull(List<Point> points)
         {
-            //Console.WriteLine("# List of Point #");
-            //foreach (Point value in points)
-            //{
-            //    Console.Write("(" + value.X + "," + value.Y + ") ");
-            //}
-            //Console.WriteLine();
-            //Console.WriteLine();
-
             Point p0 = null;
             foreach (Point value in points)
             {
@@ -120,35 +102,16 @@ namespace ConvexHull
             }
 
             order = MergeSort(p0, order);
-            //Console.WriteLine("# Sorted points based on angle with point p0 ({0},{1})#", p0.X, p0.Y);
-            //foreach (Point value in order)
-            //{
-            //    Console.WriteLine("(" + value.X + "," + value.Y + ") : {0}", getAngle(p0, value));
-            //}
             List<Point> result = new List<Point>();
             result.Add(p0);
             result.Add(order[0]);
             result.Add(order[1]);
             order.RemoveAt(0);
             order.RemoveAt(0);
-            //Console.WriteLine("# Current Convex Hull #");
-            //foreach (Point value in result)
-            //{
-            //    Console.Write("(" + value.X + "," + value.Y + ") ");
-            //}
-            //Console.WriteLine();
-            //Console.WriteLine();
             foreach (Point value in order)
             {
                 keepLeft(result, value);
             }
-            Console.WriteLine();
-            //Console.WriteLine("# Convex Hull #");
-            //foreach (Point value in result)
-            //{
-            //    Console.Write("(" + value.X + "," + value.Y + ") ");
-            //}
-            //Console.WriteLine();
             return result;
         }
 
