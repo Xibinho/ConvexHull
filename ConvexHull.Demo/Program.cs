@@ -15,70 +15,71 @@ namespace ConvexHull
 
     public class Demo
     {
+        private static List<Point> _listPoints = null;
 
-        static List<Point> listPoints = null;
-
-        static void GrahamScanDemo()
+        public static void GrahamScanDemo()
         {
             GrahamScan gs = new GrahamScan();
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = gs.convexHull(listPoints);
+            var result = gs.ConvexHull(_listPoints);
             stopwatch.Stop();
-            float elapsed_time = stopwatch.ElapsedMilliseconds;
+            float elapsedTime = stopwatch.ElapsedMilliseconds;
 
-            foreach (Point value in result)
+            foreach (var value in result)
             {
                 Console.Write("(" + value.X + "," + value.Y + ") ");
             }
             Console.WriteLine();
-            Console.WriteLine("Elapsed time: {0} milliseconds", elapsed_time);
+            Console.WriteLine("Elapsed time: {0} milliseconds", elapsedTime);
         }
 
-        static void JarvisMarchDemo()
+        public static void JarvisMarchDemo()
         {
             JarvisMarch jm = new JarvisMarch();
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var result = jm.convexHull(listPoints);
+            var result = jm.ConvexHull(_listPoints);
             stopwatch.Stop();
-            float elapsed_time = stopwatch.ElapsedMilliseconds;
+            float elapsedTime = stopwatch.ElapsedMilliseconds;
 
-            foreach (Point value in result)
+            foreach (var value in result)
             {
                 Console.Write("(" + value.X + "," + value.Y + ") ");
             }
             Console.WriteLine();
-            Console.WriteLine("Elapsed time: {0} milliseconds", elapsed_time);
+            Console.WriteLine("Elapsed time: {0} milliseconds", elapsedTime);
             Console.ReadLine();
         }
 
         public static void Main()
         {
-            listPoints = new List<Point>();
+            _listPoints = new List<Point>
+            {
+                new Point(9, 1),
+                new Point(4, 3),
+                new Point(4, 5),
+                new Point(3, 2),
+                new Point(14, 2),
+                new Point(4, 12),
+                new Point(4, 10),
+                new Point(5, 6),
+                new Point(10, 2),
+                new Point(1, 2),
+                new Point(1, 10),
+                new Point(5, 2),
+                new Point(11, 2),
+                new Point(4, 11),
+                new Point(12, 4),
+                new Point(3, 1),
+                new Point(2, 6),
+                new Point(2, 4),
+                new Point(7, 8),
+                new Point(5, 5)
+            };
 
-            listPoints.Add(new Point(9, 1));
-            listPoints.Add(new Point(4, 3));
-            listPoints.Add(new Point(4, 5));
-            listPoints.Add(new Point(3, 2));
-            listPoints.Add(new Point(14, 2));
-            listPoints.Add(new Point(4, 12));
-            listPoints.Add(new Point(4, 10));
-            listPoints.Add(new Point(5, 6));
-            listPoints.Add(new Point(10, 2));
-            listPoints.Add(new Point(1, 2));
-            listPoints.Add(new Point(1, 10));
-            listPoints.Add(new Point(5, 2));
-            listPoints.Add(new Point(11, 2));
-            listPoints.Add(new Point(4, 11));
-            listPoints.Add(new Point(12, 4));
-            listPoints.Add(new Point(3, 1));
-            listPoints.Add(new Point(2, 6));
-            listPoints.Add(new Point(2, 4));
-            listPoints.Add(new Point(7, 8));
-            listPoints.Add(new Point(5, 5));
 
             Console.WriteLine("Graham Scan Results:");
             GrahamScanDemo();

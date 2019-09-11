@@ -6,25 +6,21 @@
 // 2016-05-11 <oss.devel@searchathing.com> : created csprj and splitted Main into a separate file
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
 
 namespace ConvexHull
 {
 
     public class GrahamScan
     {
-        const int TURN_LEFT = 1;
-        const int TURN_RIGHT = -1;
-        const int TURN_NONE = 0;
-        public int turn(Point p, Point q, Point r)
+        private const int TurnLeft = 1;
+        public int Turn(Point p, Point q, Point r)
         {
             return ((q.X - p.X) * (r.Y - p.Y) - (r.X - p.X) * (q.Y - p.Y)).CompareTo(0);
         }
 
-        public void keepLeft(List<Point> hull, Point r)
+        public void KeepLeft(List<Point> hull, Point r)
         {
-            while (hull.Count > 1 && turn(hull[hull.Count - 2], hull[hull.Count - 1], r) != TURN_LEFT)
+            while (hull.Count > 1 && Turn(hull[hull.Count - 2], hull[hull.Count - 1], r) != TurnLeft)
             {
                 hull.RemoveAt(hull.Count - 1);
             }
@@ -34,7 +30,7 @@ namespace ConvexHull
             }
         }
 
-        public double getAngle(Point p1, Point p2)
+        public double GetAngle(Point p1, Point p2)
         {
             float xDiff = p2.X - p1.X;
             float yDiff = p2.Y - p1.Y;
@@ -47,44 +43,44 @@ namespace ConvexHull
             {
                 return arrPoint;
             }
-            List<Point> arrSortedInt = new List<Point>();
-            int middle = (int)arrPoint.Count / 2;
-            List<Point> leftArray = arrPoint.GetRange(0, middle);
-            List<Point> rightArray = arrPoint.GetRange(middle, arrPoint.Count - middle);
+            var arrSortedInt = new List<Point>();
+            var middle = (int)arrPoint.Count / 2;
+            var leftArray = arrPoint.GetRange(0, middle);
+            var rightArray = arrPoint.GetRange(middle, arrPoint.Count - middle);
             leftArray = MergeSort(p0, leftArray);
             rightArray = MergeSort(p0, rightArray);
-            int leftptr = 0;
-            int rightptr = 0;
-            for (int i = 0; i < leftArray.Count + rightArray.Count; i++)
+            var leftPointer = 0;
+            var rightPointer = 0;
+            for (var i = 0; i < leftArray.Count + rightArray.Count; i++)
             {
-                if (leftptr == leftArray.Count)
+                if (leftPointer == leftArray.Count)
                 {
-                    arrSortedInt.Add(rightArray[rightptr]);
-                    rightptr++;
+                    arrSortedInt.Add(rightArray[rightPointer]);
+                    rightPointer++;
                 }
-                else if (rightptr == rightArray.Count)
+                else if (rightPointer == rightArray.Count)
                 {
-                    arrSortedInt.Add(leftArray[leftptr]);
-                    leftptr++;
+                    arrSortedInt.Add(leftArray[leftPointer]);
+                    leftPointer++;
                 }
-                else if (getAngle(p0, leftArray[leftptr]) < getAngle(p0, rightArray[rightptr]))
+                else if (GetAngle(p0, leftArray[leftPointer]) < GetAngle(p0, rightArray[rightPointer]))
                 {
-                    arrSortedInt.Add(leftArray[leftptr]);
-                    leftptr++;
+                    arrSortedInt.Add(leftArray[leftPointer]);
+                    leftPointer++;
                 }
                 else
                 {
-                    arrSortedInt.Add(rightArray[rightptr]);
-                    rightptr++;
+                    arrSortedInt.Add(rightArray[rightPointer]);
+                    rightPointer++;
                 }
             }
             return arrSortedInt;
         }
 
-        public List<Point> convexHull(List<Point> points)
+        public List<Point> ConvexHull(List<Point> points)
         {
             Point p0 = null;
-            foreach (Point value in points)
+            foreach (var value in points)
             {
                 if (p0 == null)
                     p0 = value;
@@ -94,23 +90,20 @@ namespace ConvexHull
                         p0 = value;
                 }
             }
-            List<Point> order = new List<Point>();
-            foreach (Point value in points)
+            var order = new List<Point>();
+            foreach (var value in points)
             {
                 if (p0 != value)
                     order.Add(value);
             }
 
             order = MergeSort(p0, order);
-            List<Point> result = new List<Point>();
-            result.Add(p0);
-            result.Add(order[0]);
-            result.Add(order[1]);
+            var result = new List<Point> {p0, order[0], order[1]};
             order.RemoveAt(0);
             order.RemoveAt(0);
-            foreach (Point value in order)
+            foreach (var value in order)
             {
-                keepLeft(result, value);
+                KeepLeft(result, value);
             }
             return result;
         }

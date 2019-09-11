@@ -6,53 +6,49 @@
 // 2016-05-11 <oss.devel@searchathing.com> : created csprj and splitted Main into a separate file
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
 
 namespace ConvexHull
 {
 
     public class JarvisMarch
     {
-        const int TURN_LEFT = 1;
-        const int TURN_RIGHT = -1;
-        const int TURN_NONE = 0;
-        public int turn(Point p, Point q, Point r)
+        private const int TurnRight = -1;
+        private const int TurnNone = 0;
+        public int Turn(Point p, Point q, Point r)
         {
             return ((q.X - p.X) * (r.Y - p.Y) - (r.X - p.X) * (q.Y - p.Y)).CompareTo(0);
         }
 
-        public int dist(Point p, Point q)
+        public int Dist(Point p, Point q)
         {
-            int dx = q.X - p.X;
-            int dy = q.Y - p.Y;
+            var dx = q.X - p.X;
+            var dy = q.Y - p.Y;
             return dx * dx + dy * dy;
         }
 
-        public Point nextHullPoint(List<Point> points, Point p)
+        public Point NextHullPoint(List<Point> points, Point p)
         {
-            Point q = p;
-            int t;
-            foreach (Point r in points)
+            var q = p;
+            foreach (var r in points)
             {
-                t = turn(p, q, r);
-                if (t == TURN_RIGHT || t == TURN_NONE && dist(p, r) > dist(p, q))
+                var t = Turn(p, q, r);
+                if (t == TurnRight || t == TurnNone && Dist(p, r) > Dist(p, q))
                     q = r;
             }
             return q;
         }
 
-        public double getAngle(Point p1, Point p2)
+        public double GetAngle(Point p1, Point p2)
         {
             float xDiff = p2.X - p1.X;
             float yDiff = p2.Y - p1.Y;
             return Math.Atan2(yDiff, xDiff) * 180.0 / Math.PI;
         }
 
-        public List<Point> convexHull(List<Point> points)
+        public List<Point> ConvexHull(List<Point> points)
         {
-            List<Point> hull = new List<Point>();
-            foreach (Point p in points)
+            var hull = new List<Point>();
+            foreach (var p in points)
             {
                 if (hull.Count == 0)
                     hull.Add(p);
@@ -65,11 +61,11 @@ namespace ConvexHull
                             hull[0] = p;
                 }
             }
-            Point q;
-            int counter = 0;
+
+            var counter = 0;
             while (counter < hull.Count)
             {
-                q = nextHullPoint(points, hull[counter]);
+                var q = NextHullPoint(points, hull[counter]);
                 if (q != hull[0])
                 {
                     hull.Add(q);

@@ -36,7 +36,7 @@ pl.Add(7, 8)
 pl.Add(5, 5)
 
 ; Get the result from the C# code
-result := GrahamScanner.convexHull(pl.Points)
+result := GrahamScanner.ConvexHull(pl.Points)
 
 ; .NET List<Point> is not easy to use from AHK, so wrap it in a helper class to make it behave like a normal AHK array
 result := new ListWrapper(result)
@@ -49,7 +49,7 @@ for k, v in result {
 }
 
 ; Get the result from the C# code
-result := JarvisMarcher.convexHull(pl.Points)
+result := JarvisMarcher.ConvexHull(pl.Points)
 
 ; .NET List<Point> is not easy to use from AHK, so wrap it in a helper class to make it behave like a normal AHK array
 result := new ListWrapper(result)
