@@ -15,11 +15,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Add PointWrapper AHK class to make dealing with List<Point> easy
 - Convert Jarvis March for use with AHK
 ### Changed
+- Move all AHK code into ConvexHull.ahk
 - Replaced getX() / getY() methods for Point class with .X and .Y properties
 - Switch from using `Point[]` to `List<Point>`
 ### Deprecated
 ### Removed
-- Remove commented code, superfluous Console.Write statements
+- Remove commented code from C#, superfluous Console.Write statements
 ### Fixed
 - Enforce naming conventions, coding standards etc
 
