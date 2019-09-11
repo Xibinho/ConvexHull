@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Move all AHK code into ConvexHull.ahk
 - Replaced getX() / getY() methods for Point class with .X and .Y properties
 - Switch from using `Point[]` to `List<Point>`
+- Repository file structure rearranged to separate C# and AHK code
 ### Deprecated
 ### Removed
 - Remove commented code from C#, superfluous Console.Write statements
