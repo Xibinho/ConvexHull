@@ -28,28 +28,30 @@ namespace ConvexHull
             stopwatch.Stop();
             float elapsed_time = stopwatch.ElapsedMilliseconds;
 
-            Console.WriteLine("# Convex Hull #");
             foreach (Point value in result)
             {
                 Console.Write("(" + value.X + "," + value.Y + ") ");
             }
             Console.WriteLine();
             Console.WriteLine("Elapsed time: {0} milliseconds", elapsed_time);
-            Console.WriteLine("Press enter to close...");
-            Console.ReadLine();
         }
 
         static void JarvisMarchDemo()
         {
-            JarvisMatch jm = new JarvisMatch();
+            JarvisMarch jm = new JarvisMarch();
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            jm.convexHull(listPoints);
+            var result = jm.convexHull(listPoints);
             stopwatch.Stop();
             float elapsed_time = stopwatch.ElapsedMilliseconds;
+
+            foreach (Point value in result)
+            {
+                Console.Write("(" + value.X + "," + value.Y + ") ");
+            }
+            Console.WriteLine();
             Console.WriteLine("Elapsed time: {0} milliseconds", elapsed_time);
-            Console.WriteLine("Press enter to close...");
             Console.ReadLine();
         }
 
@@ -78,9 +80,17 @@ namespace ConvexHull
             listPoints.Add(new Point(7, 8));
             listPoints.Add(new Point(5, 5));
 
+            Console.WriteLine("Graham Scan Results:");
             GrahamScanDemo();
 
-            //sJarvisMarchDemo();
+            Console.WriteLine("\n\n==============================================\n\n");
+
+            Console.WriteLine("Jarvis March Results:");
+            JarvisMarchDemo();
+
+            Console.WriteLine("Press enter to close...");
+            Console.ReadLine();
+
         }
 
     }

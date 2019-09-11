@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 ### Added
 - Add PointWrapper AHK class to make dealing with List<Point> easy
+- Convert Jarvis March for use with AHK
 ### Changed
 - Replaced getX() / getY() methods for Point class with .X and .Y properties
 - Switch from using `Point[]` to `List<Point>`

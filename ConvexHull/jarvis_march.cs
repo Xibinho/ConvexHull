@@ -12,7 +12,7 @@ using System.Diagnostics;
 namespace ConvexHull
 {
 
-    public class JarvisMatch
+    public class JarvisMarch
     {
         const int TURN_LEFT = 1;
         const int TURN_RIGHT = -1;
@@ -49,15 +49,8 @@ namespace ConvexHull
             return Math.Atan2(yDiff, xDiff) * 180.0 / Math.PI;
         }
 
-        public void convexHull(List<Point> points)
+        public List<Point> convexHull(List<Point> points)
         {
-            Console.WriteLine("# List of Point #");
-            foreach (Point value in points)
-            {
-                Console.Write("(" + value.X + "," + value.Y + ") ");
-            }
-            Console.WriteLine();
-            Console.WriteLine();
             List<Point> hull = new List<Point>();
             foreach (Point p in points)
             {
@@ -74,24 +67,16 @@ namespace ConvexHull
             }
             Point q;
             int counter = 0;
-            Console.WriteLine("The lowest point is (" + hull[0].X + ", " + hull[0].Y + ")");
             while (counter < hull.Count)
             {
                 q = nextHullPoint(points, hull[counter]);
                 if (q != hull[0])
                 {
-                    Console.WriteLine("Next Point is (" + q.X + "," + q.Y + ") compared to Point (" + hull[hull.Count - 1].X + "," + hull[hull.Count - 1].Y + ") : " + getAngle(hull[hull.Count - 1], q) + " degrees");
                     hull.Add(q);
                 }
                 counter++;
             }
-            Console.WriteLine();
-            Console.WriteLine("# Convex Hull #");
-            foreach (Point value in hull)
-            {
-                Console.Write("(" + value.X + "," + value.Y + ") ");
-            }
-            Console.WriteLine();
+            return hull;
         }
 
     }
