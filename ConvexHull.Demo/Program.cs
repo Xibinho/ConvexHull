@@ -17,7 +17,7 @@ namespace ConvexHull
 
         public static void GrahamScanDemo()
         {
-            GrahamScan gs = new GrahamScan();
+            var gs = new GrahamScan();
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -35,7 +35,7 @@ namespace ConvexHull
 
         public static void JarvisMarchDemo()
         {
-            JarvisMarch jm = new JarvisMarch();
+            var jm = new JarvisMarch();
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
