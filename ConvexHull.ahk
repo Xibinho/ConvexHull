@@ -28,6 +28,6 @@ result := GrahamScanner.convexHull(pl.Points)
 str := "HULL:`n"
 Loop % result.MaxIndex() + 1 ; Returned array from C# is 0-based, not 1-based
 {
-	str .= result[A_Index - 1].getX() ", " result[A_Index - 1].gety() "`n"
+	str .= result[A_Index - 1].X ", " result[A_Index - 1].Y "`n"
 }
 msgbox % str

@@ -31,7 +31,7 @@ namespace ConvexHull
             Console.WriteLine("# Convex Hull #");
             foreach (Point value in result)
             {
-                Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+                Console.Write("(" + value.X + "," + value.Y + ") ");
             }
             Console.WriteLine();
             Console.WriteLine("Elapsed time: {0} milliseconds", elapsed_time);

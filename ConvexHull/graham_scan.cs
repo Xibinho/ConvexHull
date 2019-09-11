@@ -19,25 +19,25 @@ namespace ConvexHull
         const int TURN_NONE = 0;
         public int turn(Point p, Point q, Point r)
         {
-            return ((q.getX() - p.getX()) * (r.getY() - p.getY()) - (r.getX() - p.getX()) * (q.getY() - p.getY())).CompareTo(0);
+            return ((q.X - p.X) * (r.Y - p.Y) - (r.X - p.X) * (q.Y - p.Y)).CompareTo(0);
         }
 
         public void keepLeft(List<Point> hull, Point r)
         {
             while (hull.Count > 1 && turn(hull[hull.Count - 2], hull[hull.Count - 1], r) != TURN_LEFT)
             {
-                //Console.WriteLine("Removing Point ({0}, {1}) because turning right ", hull[hull.Count - 1].getX(), hull[hull.Count - 1].getY());
+                //Console.WriteLine("Removing Point ({0}, {1}) because turning right ", hull[hull.Count - 1].X, hull[hull.Count - 1].Y);
                 hull.RemoveAt(hull.Count - 1);
             }
             if (hull.Count == 0 || hull[hull.Count - 1] != r)
             {
-                //Console.WriteLine("Adding Point ({0}, {1})", r.getX(), r.getY());
+                //Console.WriteLine("Adding Point ({0}, {1})", r.X, r.Y);
                 hull.Add(r);
             }
             //Console.WriteLine("# Current Convex Hull #");
             foreach (Point value in hull)
             {
-                //Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+                //Console.Write("(" + value.X + "," + value.Y + ") ");
             }
             //Console.WriteLine();
             //Console.WriteLine();
@@ -46,8 +46,8 @@ namespace ConvexHull
 
         public double getAngle(Point p1, Point p2)
         {
-            float xDiff = p2.getX() - p1.getX();
-            float yDiff = p2.getY() - p1.getY();
+            float xDiff = p2.X - p1.X;
+            float yDiff = p2.Y - p1.Y;
             return Math.Atan2(yDiff, xDiff) * 180.0 / Math.PI;
         }
 
@@ -96,7 +96,7 @@ namespace ConvexHull
             //Console.WriteLine("# List of Point #");
             //foreach (Point value in points)
             //{
-            //    Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+            //    Console.Write("(" + value.X + "," + value.Y + ") ");
             //}
             //Console.WriteLine();
             //Console.WriteLine();
@@ -108,7 +108,7 @@ namespace ConvexHull
                     p0 = value;
                 else
                 {
-                    if (p0.getY() > value.getY())
+                    if (p0.Y > value.Y)
                         p0 = value;
                 }
             }
@@ -120,10 +120,10 @@ namespace ConvexHull
             }
 
             order = MergeSort(p0, order);
-            //Console.WriteLine("# Sorted points based on angle with point p0 ({0},{1})#", p0.getX(), p0.getY());
+            //Console.WriteLine("# Sorted points based on angle with point p0 ({0},{1})#", p0.X, p0.Y);
             //foreach (Point value in order)
             //{
-            //    Console.WriteLine("(" + value.getX() + "," + value.getY() + ") : {0}", getAngle(p0, value));
+            //    Console.WriteLine("(" + value.X + "," + value.Y + ") : {0}", getAngle(p0, value));
             //}
             List<Point> result = new List<Point>();
             result.Add(p0);
@@ -134,7 +134,7 @@ namespace ConvexHull
             //Console.WriteLine("# Current Convex Hull #");
             //foreach (Point value in result)
             //{
-            //    Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+            //    Console.Write("(" + value.X + "," + value.Y + ") ");
             //}
             //Console.WriteLine();
             //Console.WriteLine();
@@ -146,7 +146,7 @@ namespace ConvexHull
             //Console.WriteLine("# Convex Hull #");
             //foreach (Point value in result)
             //{
-            //    Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+            //    Console.Write("(" + value.X + "," + value.Y + ") ");
             //}
             //Console.WriteLine();
             return result.ToArray();

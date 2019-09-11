@@ -14,20 +14,12 @@ namespace ConvexHull
 
     public class Point
     {
-        private int y;
-        private int x;
-        public Point(int _x, int _y)
+        public int X { get; }
+        public int Y { get; }
+        public Point(int x, int y)
         {
-            x = _x;
-            y = _y;
-        }
-        public int getX()
-        {
-            return x;
-        }
-        public int getY()
-        {
-            return y;
+            X = x;
+            Y = y;
         }
     }
     
@@ -48,7 +40,7 @@ namespace ConvexHull
 
         public int Test()
         {
-            return Points[0].getX();
+            return Points[0].X;
         }
     }
 }

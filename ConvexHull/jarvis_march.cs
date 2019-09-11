@@ -19,13 +19,13 @@ namespace ConvexHull
         const int TURN_NONE = 0;
         public int turn(Point p, Point q, Point r)
         {
-            return ((q.getX() - p.getX()) * (r.getY() - p.getY()) - (r.getX() - p.getX()) * (q.getY() - p.getY())).CompareTo(0);
+            return ((q.X - p.X) * (r.Y - p.Y) - (r.X - p.X) * (q.Y - p.Y)).CompareTo(0);
         }
 
         public int dist(Point p, Point q)
         {
-            int dx = q.getX() - p.getX();
-            int dy = q.getY() - p.getY();
+            int dx = q.X - p.X;
+            int dy = q.Y - p.Y;
             return dx * dx + dy * dy;
         }
 
@@ -44,8 +44,8 @@ namespace ConvexHull
 
         public double getAngle(Point p1, Point p2)
         {
-            float xDiff = p2.getX() - p1.getX();
-            float yDiff = p2.getY() - p1.getY();
+            float xDiff = p2.X - p1.X;
+            float yDiff = p2.Y - p1.Y;
             return Math.Atan2(yDiff, xDiff) * 180.0 / Math.PI;
         }
 
@@ -54,7 +54,7 @@ namespace ConvexHull
             Console.WriteLine("# List of Point #");
             foreach (Point value in points)
             {
-                Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+                Console.Write("(" + value.X + "," + value.Y + ") ");
             }
             Console.WriteLine();
             Console.WriteLine();
@@ -65,22 +65,22 @@ namespace ConvexHull
                     hull.Add(p);
                 else
                 {
-                    if (hull[0].getX() > p.getX())
+                    if (hull[0].X > p.X)
                         hull[0] = p;
-                    else if (hull[0].getX() == p.getX())
-                        if (hull[0].getY() > p.getY())
+                    else if (hull[0].X == p.X)
+                        if (hull[0].Y > p.Y)
                             hull[0] = p;
                 }
             }
             Point q;
             int counter = 0;
-            Console.WriteLine("The lowest point is (" + hull[0].getX() + ", " + hull[0].getY() + ")");
+            Console.WriteLine("The lowest point is (" + hull[0].X + ", " + hull[0].Y + ")");
             while (counter < hull.Count)
             {
                 q = nextHullPoint(points, hull[counter]);
                 if (q != hull[0])
                 {
-                    Console.WriteLine("Next Point is (" + q.getX() + "," + q.getY() + ") compared to Point (" + hull[hull.Count - 1].getX() + "," + hull[hull.Count - 1].getY() + ") : " + getAngle(hull[hull.Count - 1], q) + " degrees");
+                    Console.WriteLine("Next Point is (" + q.X + "," + q.Y + ") compared to Point (" + hull[hull.Count - 1].X + "," + hull[hull.Count - 1].Y + ") : " + getAngle(hull[hull.Count - 1], q) + " degrees");
                     hull.Add(q);
                 }
                 counter++;
@@ -89,7 +89,7 @@ namespace ConvexHull
             Console.WriteLine("# Convex Hull #");
             foreach (Point value in hull)
             {
-                Console.Write("(" + value.getX() + "," + value.getY() + ") ");
+                Console.Write("(" + value.X + "," + value.Y + ") ");
             }
             Console.WriteLine();
         }
